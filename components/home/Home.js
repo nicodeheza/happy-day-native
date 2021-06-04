@@ -4,7 +4,6 @@ import {
   View,
   Image,
   ImageBackground,
-  StatusBar,
   KeyboardAvoidingView,
 } from "react-native";
 import { useFonts, Roboto_700Bold } from "@expo-google-fonts/roboto";
@@ -27,7 +26,6 @@ export default function Home() {
         behavior="position"
         enabled={avoid}
       >
-        <StatusBar backgroundColor="#61dafb" barStyle={"dark-content"} />
         <View style={style.mainContainer}>
           {showRecover ? <Recover setShowRecover={setShowRecover} /> : null}
           <View style={style.header}>

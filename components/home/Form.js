@@ -96,16 +96,16 @@ export default function Form({ setAvoid }) {
       fetch(`${uri}/api/login`, {
         method: "POST",
         body: JSON.stringify(send),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+        headers: { "Content-type": "application/json; charset=UTF-8" }
       })
-        .then((res) => {
+        .then(res => {
           if (res.status === 401) {
             setLogInMessage("The email address or password is incorrect.");
           } else {
-            res.json();
+            return res.json();
           }
         })
-        .then((data) => {
+        .then(data => {
           console.log(data);
           if (data) {
             console.log("log in");

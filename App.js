@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import Home from './components/home/Home';
 import Loading from './components/loading/Loading';
 import Principal from './components/principal/Principal';
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <authContext.Provider value={setAuth}>
-      <View style={{flex:1}}>
+    <StatusBar backgroundColor="#61dafb" barStyle={"dark-content"} />
       {
         auth === undefined ?
         (<Loading/>) :
@@ -33,7 +33,6 @@ export default function App() {
         (<Principal/>) :
         (<Home/>)
       }
-      </View>
     </authContext.Provider>
   );
 }
