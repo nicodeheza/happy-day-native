@@ -21,9 +21,10 @@ export default function Recover({ setShowRecover }) {
             .then(res=>res.json())
             .then(data=>{
                 setMessage(data.message);
+                //console.log('recover fetch');
             })
             .catch(err=>console.log(err));
-            console.log(email)
+            //console.log(email)
             setEmail('');
         }
     }

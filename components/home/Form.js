@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import style from "./Form-style";
 import FormSubmitBtn from "./FormSubmitBtn";
-import { authContext } from "../../authContext";
+import { authContext } from "../../contexts";
 import { uri } from "../../constants";
 
 export default function Form({ setAvoid }) {
@@ -74,6 +74,7 @@ export default function Form({ setAvoid }) {
           } else {
             setAuth(data.auth);
           }
+         // console.log('singup fetch')
         })
         .catch((err) => console.log(err));
     }
@@ -92,7 +93,7 @@ export default function Form({ setAvoid }) {
         email: logInFields.email,
         password: logInFields.password,
       };
-      console.log(send);
+      //console.log(send);
       fetch(`${uri}/api/login`, {
         method: "POST",
         body: JSON.stringify(send),
@@ -106,11 +107,12 @@ export default function Form({ setAvoid }) {
           }
         })
         .then(data => {
-          console.log(data);
+         // console.log(data);
           if (data) {
-            console.log("log in");
+           // console.log("log in");
             setAuth(data.auth);
           }
+          //console.log('login fetch')
         })
         .catch((err) => console.log(err));
     }

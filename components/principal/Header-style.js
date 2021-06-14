@@ -7,6 +7,7 @@ export default StyleSheet.create({
         top:0,
         left:0,
         height:'15%', 
+        width:'100%',
         flexDirection:'row', 
         alignItems:'center'
     },

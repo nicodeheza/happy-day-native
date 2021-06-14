@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { monthColors, abrMonths } from "../../constants";
 import style from "./Header-style";
+import {principalContext} from '../../contexts';
 
 function getMonthObject(monthColors, abrMonths) {
   let month = [];
@@ -19,12 +20,31 @@ function getMonthObject(monthColors, abrMonths) {
 }
 const month = getMonthObject(monthColors, abrMonths);
 
-const MonthBtn = ({ abr, color, onPress, onPressOut, lineColor }) => {
+const MonthBtn = ({ abr, color, onPress, onPressOut, lineColor, index }) => {
+    const {monthRef, setMessage, calendarKeys}= useContext(principalContext);
+    const monthNum= (index + 1).toString();
+
+    const scrollTo=()=>{
+      if (monthRef.current){
+        const activesMonths= calendarKeys
+        const getIndex=  activesMonths.indexOf(monthNum);
+   
+        if(getIndex >= 0){
+          monthRef.current.scrollToIndex({index: getIndex , animated: true, viewPosition: 0.5}); 
+        }else{
+          //console.log('none');
+          setMessage("You don't have events this month");
+        }
+      }else{
+        setMessage("You don't have events");
+      }
+    }
   return (
     <Pressable
       style={style.monthBtnPress}
       onPressIn={onPress}
       onPressOut={onPressOut}
+      onPress={()=> scrollTo() }
     >
       <View
         style={[
@@ -44,7 +64,7 @@ const MonthBtn = ({ abr, color, onPress, onPressOut, lineColor }) => {
 export default function Header() {
   const [btnPressed, setBtnPressed] = useState(null);
 
-  const renderBtn = ({ item }) => {
+  const renderBtn = ({ item, index }) => {
     const lineColor = item.abr === btnPressed ? "#6700b7" : "white";
     return (
       <MonthBtn
@@ -53,6 +73,7 @@ export default function Header() {
         color={item.color}
         onPress={() => setBtnPressed(item.abr)}
         onPressOut={() => setBtnPressed(null)}
+        index={index}
       />
     );
   };
@@ -76,3 +97,5 @@ export default function Header() {
     </ImageBackground>
   );
 }
+
+

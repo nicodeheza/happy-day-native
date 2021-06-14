@@ -4,7 +4,7 @@ import Home from './components/home/Home';
 import Loading from './components/loading/Loading';
 import Principal from './components/principal/Principal';
 import {uri} from './constants';
-import{authContext} from './authContext';
+import{authContext} from './contexts';
 
 export default function App() {
   const [auth, setAuth]= useState(undefined);
@@ -17,7 +17,8 @@ export default function App() {
   .then(res=> res.json())
   .then(data=>{
     setAuth(data.auth);
-    console.log(data);
+    //console.log(data);
+   // console.log('app fetch');
   })
   .catch(err => console.log(err));
     }
