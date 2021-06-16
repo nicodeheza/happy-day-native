@@ -10,6 +10,17 @@ import {principalContext, authContext} from '../../contexts';
 import Calendar from './calendar/Calendar';
 import style from './principal-style';
 import {uri} from '../../constants';
+import registerForPushNotificationsAsync from '../../registerPush';
+import * as Notifications from 'expo-notifications';
+
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
 
 export default function Principal() {
     const [fontsLoaded]= useFonts({FredokaOne_400Regular, Roboto_700Bold});
@@ -24,7 +35,7 @@ export default function Principal() {
     const setAuth= useContext(authContext);
     const [calendarKeys, setCalendarKeys]= useState([]);
 
-    //get email notification status
+    //get email notification status and set push
     useEffect(()=>{
         if(firstFetch){
           fetch(`${uri}/api/emailNotification`,{
@@ -42,7 +53,9 @@ export default function Principal() {
         }
       })
       .catch(err => console.log(err));
-        }
+
+      registerForPushNotificationsAsync();
+     }
     }, [firstFetch]);
 
 
