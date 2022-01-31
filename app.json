@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon-hd.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.nicolasdeheza.happyday",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
